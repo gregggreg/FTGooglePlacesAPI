@@ -111,6 +111,9 @@
     _nextPageToken = [dictionary ftgp_nilledObjectForKey:@"next_page_token"];
     
     NSArray *results = [dictionary ftgp_nilledObjectForKey:@"results"];
+    if (!results) {
+        results = [dictionary ftgp_nilledObjectForKey:@"candidates"];
+    }
     _results = [self ftgpr_parseResultsItemFromArray:results];
 }
 
