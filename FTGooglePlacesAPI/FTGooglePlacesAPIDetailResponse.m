@@ -54,6 +54,10 @@
 
 @end
 
+@implementation FTAddressComponent
+
+@end
+
 
 @implementation FTGooglePlacesAPIDetailResponse (Private)
 
@@ -103,6 +107,23 @@
     _websiteUrl = [NSURL URLWithString:[dictionary ftgp_nilledObjectForKey:@"website"]];
     
     _utcOffset = [[dictionary ftgp_nilledObjectForKey:@"utc_offset"] doubleValue];
+    
+    NSArray *addressComponents = [dictionary ftgp_nilledObjectForKey:@"address_components"];
+    if (addressComponents.count) {
+        NSMutableArray *comps = [NSMutableArray arrayWithCapacity:[addressComponents count]];
+        for (NSDictionary *dict in addressComponents) {
+            NSArray<NSString *> *types = dict[@"types"];
+            if (types.count) {
+                for (NSString *type in types) {
+                    FTAddressComponent *comp = [[FTAddressComponent alloc] init];
+                    comp.type = type;
+                    comp.name = dict[@"short_name"] ? dict[@"short_name"] : dict[@"long_name"];
+                    [comps addObject:comp];
+                }
+            }
+        }
+        _addressComponents = comps;
+    }
 }
 
 @end

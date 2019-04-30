@@ -37,6 +37,20 @@
 #import "FTGooglePlacesAPIResponse.h"
 #import <CoreLocation/CoreLocation.h>
 
+@interface FTAddressComponent : NSObject
+
+/**
+ * Type of the address component. For a list of supported types, see
+ * https://developers.google.com/places/ios-api/supported_types#table2. This string will be one
+ * of the constants defined in GMSPlaceTypes.h.
+ */
+@property(nonatomic, copy) NSString *type;
+
+/** Name of the address component, e.g. "Sydney" */
+@property(nonatomic, copy) NSString *name;
+
+@end
+
 @interface FTGooglePlacesAPIDetailResponse : FTGooglePlacesAPIResponse
 
 /**
@@ -99,5 +113,7 @@
 @property (nonatomic, strong, readonly) NSURL *websiteUrl;
 
 @property (nonatomic, assign, readonly) NSTimeInterval utcOffset;
+
+@property (nonatomic, strong, readonly) NSArray<FTAddressComponent *> *addressComponents;
 
 @end
