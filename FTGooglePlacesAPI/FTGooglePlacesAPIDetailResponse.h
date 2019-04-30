@@ -49,6 +49,10 @@
 /** Name of the address component, e.g. "Sydney" */
 @property(nonatomic, copy) NSString *name;
 
+@property(nonatomic, copy) NSString *shortName;
+
+@property(nonatomic, copy) NSString *longName;
+
 @end
 
 @interface FTGooglePlacesAPIDetailResponse : FTGooglePlacesAPIResponse

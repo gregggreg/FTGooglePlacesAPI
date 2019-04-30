@@ -116,7 +116,9 @@
             if (types.count) {
                 FTAddressComponent *comp = [[FTAddressComponent alloc] init];
                 comp.type = types[0];
-                comp.name = dict[@"short_name"] ? dict[@"short_name"] : dict[@"long_name"];
+                comp.name = dict[@"long_name"] ? dict[@"long_name"] : dict[@"short_name"];
+                comp.shortName =  dict[@"short_name"];
+                comp.longName = dict[@"long_name"];
                 [comps addObject:comp];
             }
         }
